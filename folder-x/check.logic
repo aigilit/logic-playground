@@ -1,0 +1,236 @@
+{
+  "label" : "care-rental",
+  "expressionLanguage" : "FEEL",
+  "id" : "care-rental",
+  "logicFlow" : {
+    "label" : "Start care-rental",
+    "type" : "start",
+    "id" : "71531f5a-c1ee-45cf-a189-c3c56524ccec",
+    "variables" : {
+      "input" : {
+        "car_type" : {
+          "type" : "string",
+          "id" : "8a0dbffc-9d35-4f85-a349-37f3973bdeba"
+        }
+      },
+      "output" : {
+        "total_price" : {
+          "type" : "number",
+          "id" : "60dc4d30-f39b-4659-8a33-977dd447e3f0"
+        },
+        "total_discount" : {
+          "type" : "number",
+          "id" : "d785c4c9-7eed-4415-a898-991443dd5107"
+        }
+      }
+    },
+    "children" : [ {
+      "description" : null,
+      "type" : "decision",
+      "id" : "30b113c0-eb52-421d-a5ae-6f87b8b1f129",
+      "children" : [ {
+        "description" : null,
+        "type" : "condition",
+        "id" : "f6694368-bbe1-4ea1-a808-981ef30966b3",
+        "children" : [ {
+          "description" : null,
+          "type" : "assign",
+          "id" : "80e589b8-422b-4f21-8a6f-13fcda6c299c",
+          "children" : [ ],
+          "label" : "Assign price per day for full size",
+          "compartments" : [ {
+            "target" : "price_per_day",
+            "expression" : "100"
+          } ],
+          "disabled" : null
+        }, {
+          "description" : null,
+          "type" : "decision",
+          "id" : "2cd181a4-7e20-4156-b367-04eb0dadad27",
+          "children" : [ {
+            "description" : null,
+            "type" : "condition",
+            "id" : "077c3101-aaa5-4c13-b105-9dca5f5a01b0",
+            "children" : [ {
+              "description" : null,
+              "type" : "assign",
+              "id" : "5b4bf3c2-1998-4f8c-b1a8-a09b805e8e2a",
+              "children" : [ ],
+              "label" : "Calculate the discount per day and total discount",
+              "compartments" : [ {
+                "target" : "discount_per_day ",
+                "expression" : " 12"
+              } ],
+              "disabled" : null
+            }, {
+              "description" : null,
+              "type" : "assign",
+              "id" : "ff188fe4-863e-4976-8416-1206f34a4695",
+              "children" : [ ],
+              "label" : "Assignment ",
+              "compartments" : [ {
+                "target" : "total_discount",
+                "expression" : "discount_per_day * number_of_days"
+              } ],
+              "disabled" : null
+            } ],
+            "label" : "More than 10 days",
+            "when" : "> 10",
+            "disabled" : null
+          }, {
+            "description" : null,
+            "type" : "condition",
+            "id" : "7477c04d-c061-4085-bbfc-b43bd7bb75a1",
+            "children" : [ {
+              "description" : null,
+              "type" : "assign",
+              "id" : "64fd33fe-a8b9-4604-bf94-716402c5b149",
+              "children" : [ ],
+              "label" : "No discount",
+              "compartments" : [ {
+                "target" : "discount_per_day",
+                "expression" : "0"
+              } ],
+              "disabled" : null
+            }, {
+              "description" : null,
+              "type" : "assign",
+              "id" : "c80084dc-4714-4d30-b410-cbb4ab67dd4b",
+              "children" : [ ],
+              "label" : "Assignment ",
+              "compartments" : [ {
+                "target" : "total_discount",
+                "expression" : "0"
+              } ],
+              "disabled" : null
+            } ],
+            "label" : "Less or equal  to 10 days",
+            "when" : "",
+            "disabled" : null
+          } ],
+          "label" : "Check for number of rental days",
+          "expression" : "number_of_days",
+          "disabled" : null,
+          "matchType" : null
+        } ],
+        "label" : "Full size car",
+        "when" : "=\"full\"",
+        "disabled" : null
+      }, {
+        "description" : null,
+        "type" : "condition",
+        "id" : "cb07f9cc-7472-4688-916f-17691f6054c7",
+        "children" : [ {
+          "description" : null,
+          "type" : "assign",
+          "id" : "7218d3f3-2d8e-4a27-976b-45823058bc54",
+          "children" : [ ],
+          "label" : "Assignment ",
+          "compartments" : [ {
+            "target" : "price_per_day",
+            "expression" : "100"
+          } ],
+          "disabled" : null
+        }, {
+          "description" : null,
+          "type" : "decision",
+          "id" : "1da37022-4c90-41e7-a9c6-76004f91877e",
+          "children" : [ {
+            "description" : null,
+            "type" : "condition",
+            "id" : "c6ada871-4c0e-42d4-94ec-2b655d0ffed4",
+            "children" : [ {
+              "description" : null,
+              "type" : "assign",
+              "id" : "aa2af9db-730c-4fca-8d37-b018f861364a",
+              "children" : [ ],
+              "label" : "Calculate the discount per day and total discount",
+              "compartments" : [ {
+                "target" : "discount_per_day ",
+                "expression" : " 10"
+              } ],
+              "disabled" : null
+            }, {
+              "description" : null,
+              "type" : "assign",
+              "id" : "e0b85023-3a24-4364-afd9-e446ea9395be",
+              "children" : [ ],
+              "label" : "Assignment ",
+              "compartments" : [ {
+                "target" : "total_discount",
+                "expression" : "discount_per_day * number_of_days"
+              } ],
+              "disabled" : null
+            } ],
+            "label" : "As of two weeks rental",
+            "when" : ">= 14",
+            "disabled" : null
+          }, {
+            "description" : null,
+            "type" : "condition",
+            "id" : "81dbecda-ecc3-4f9b-812e-3b1e7b36d20a",
+            "children" : [ {
+              "description" : null,
+              "type" : "assign",
+              "id" : "bcc67f03-51ee-4258-a911-c89cc600b822",
+              "children" : [ ],
+              "label" : "No discount",
+              "compartments" : [ {
+                "target" : "discount_per_day",
+                "expression" : "0"
+              } ],
+              "disabled" : null
+            }, {
+              "description" : null,
+              "type" : "assign",
+              "id" : "3ad3b94d-c6a5-48ec-90e2-63bcaf5f6354",
+              "children" : [ ],
+              "label" : "Assignment ",
+              "compartments" : [ {
+                "target" : "total_discount",
+                "expression" : "0"
+              } ],
+              "disabled" : null
+            } ],
+            "label" : "Less then two weeks",
+            "when" : "",
+            "disabled" : null
+          } ],
+          "label" : "Check for number of rental days days",
+          "expression" : "number_of_days",
+          "disabled" : null,
+          "matchType" : null
+        } ],
+        "label" : "Compact car pricing",
+        "when" : "=\"compact\"",
+        "disabled" : null
+      } ],
+      "label" : "Check for car type",
+      "expression" : "car_type",
+      "disabled" : null,
+      "matchType" : null
+    }, {
+      "description" : null,
+      "type" : "assign",
+      "id" : "9d213c7f-c0ee-4e6d-930f-b7cae90dd4c3",
+      "children" : [ ],
+      "label" : "Assignment ",
+      "compartments" : [ {
+        "target" : "myVariable",
+        "expression" : "1+1"
+      } ],
+      "disabled" : null
+    }, {
+      "description" : null,
+      "type" : "assign",
+      "id" : "5d7b0118-74f7-451c-9a4e-95ad56faadf9",
+      "children" : [ ],
+      "label" : "Calculate the rental price to pay",
+      "compartments" : [ {
+        "target" : "total_price",
+        "expression" : "(price_per_day * number_of_days) - total_discount"
+      } ],
+      "disabled" : null
+    } ]
+  }
+}
